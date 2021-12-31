@@ -1,0 +1,64 @@
+import java.util.*;
+// import java.util.Arrays;
+public class Solution {
+
+    static int l=0;
+
+    public static void solveHelper(char mat[][],int N,int M,int i,int j,String s,boolean visited[][])
+    {
+        if(s.length()==0){   
+            l++;
+            return;
+        }
+        if(i<0 || i>=N || j<0 || j>=M)
+            return ;
+        if(visited[i][j]== true)
+            return;
+        if(s.charAt(0)!=mat[i][j])
+            return;
+
+        visited[i][j]=true;
+
+        solveHelper(mat,N,M,i-1,j,s.substring(1),visited);
+        solveHelper(mat,N,M,i+1,j,s.substring(1),visited);
+        solveHelper(mat,N,M,i,j-1,s.substring(1),visited);
+        solveHelper(mat,N,M,i,j+1,s.substring(1),visited);
+        solveHelper(mat,N,M,i+1,j-1,s.substring(1),visited);
+        solveHelper(mat,N,M,i+1,j+1,s.substring(1),visited);
+        solveHelper(mat,N,M,i-1,j-1,s.substring(1),visited);
+        solveHelper(mat,N,M,i-1,j+1,s.substring(1),visited);
+
+        visited[i][j]=false;
+    }
+	
+	public static int solve(String[] Graph , int N, int M)
+	{
+		/* Your class should be named Solution
+		 * Don't write main().
+		 * Don't read input, it is passed as function argument.
+		 * Return output and don't print it.
+	 	 * Taking input and printing output is handled automatically.
+        */
+        String s="CODINGNINJA";
+        char mat[][]=new char[N][M];
+        boolean visited[][]=new boolean[N][M];
+        
+        for(int i=0;i<N;i++){
+            for(int j=0;j<M;j++){
+                mat[i][j]=Graph[i].charAt(j);
+                visited[i][j]=false;
+            }
+        }
+        for(int i=0;i<N;i++){
+            for(int j=0;j<M;j++){
+               if(mat[i][j]==s.charAt(0)){
+                   solveHelper(mat,N,M,i,j,s,visited);
+                   if(l>0) 
+                       return 1;
+               }
+            }
+        }
+        return 0;
+	}	
+	
+}
