@@ -1,0 +1,28 @@
+
+/*You have been given a random integer array/list(ARR) of size N. Write a function that rotates the given array/list by D elements(towards the left).*/
+
+public class Solution {  
+    
+    public static void reverse(int arr[],int s,int e){
+        while(s<=e){
+            int temp=arr[s];
+            arr[s]=arr[e];
+            arr[e]=temp;
+            s++;e--;
+        }
+    }
+
+    public static void rotate(int[] arr, int d) {
+    	//Your code goes here
+        if(d<0 || d>=arr.length){
+            return;
+        }
+        int n=arr.length;
+        
+        reverse(arr,0,n-1);
+        reverse(arr,0,n-d-1);
+        reverse(arr,n-d,n-1);
+      
+    }
+
+}
