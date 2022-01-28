@@ -1,0 +1,31 @@
+import java.util.HashMap;
+
+public class Solution {	
+
+	public static int pairSum(int[] arr, int num) {
+		//Your code goes here
+       HashMap<Integer,Integer> hp=new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            int key=arr[i];
+            if(hp.containsKey(key)){
+                int freq=hp.get(key);
+                freq++;
+                hp.put(key,freq);
+            }
+            else
+                hp.put(key,1);
+        }
+        int ans=0;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]==num-arr[i]){
+                ans+=hp.get(num-arr[i])-1;
+            }
+            else{
+                int freq=hp.get(num-arr[i]);
+                if(freq!=0)
+                    ans+=freq;
+            }
+        }
+        return ans/2;
+    }
+}
